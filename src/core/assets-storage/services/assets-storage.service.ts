@@ -12,6 +12,7 @@ export class AssetsStorageService {
     }
 
     public async uploadFile(containerName: string, blobName: string, fileBuffer: Buffer, blobType: string): Promise<string> {
+        containerName = containerName.replace(/_/g, '').replace(/-/g, '');
         await this.createContainer(containerName);
 
         const containerClient = this.blobServiceClient.getContainerClient(containerName);
